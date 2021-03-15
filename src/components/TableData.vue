@@ -71,16 +71,16 @@
     >
       <template v-slot:top>
         <v-text-field
+        class="search-input"
           v-model="search"
-          label="Search (UPPER CASE ONLY)"
-          class="mx-4"
+          label="Search"
         ></v-text-field>
       </template>
-      <template v-slot:body.append>
+      <template>
         <tr>
           <td></td>
           <td>
-            <img :src="image_url" alt="">
+            <img src="{image_url}">
           </td>
           <td colspan="4"></td>
             <v-text-field
@@ -222,8 +222,9 @@ label{
   width: 25%;
 }
 
-.search-input {
-  background-color:#EFEBE9;
+.search-input  {
+  margin : 0 !important;
+  background-color: #EFEBE9 !important;
 }
  
 </style>
