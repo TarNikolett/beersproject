@@ -8,25 +8,25 @@
 export default {
   name: "Header",
   data: () => ({
-    message: "Beers"
+    message: "Our Products"
   })
 };
 </script>
 
 <style>
 #header-nav{
-  height: 110px;
+  height: 150px;
   background-image: url('../assets/header.jpg');
   background-repeat:no-repeat;
-    background-size:100% 100%;
+  background-size:100% 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 30px;
+  font-size: 35px;
   text-transform: uppercase;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  text-shadow: 3px 0 black, 0 3px black, 3px 0 black, 0 3px black;
+  font-family: 'Akaya Telivigala', cursive;
   color: rgb(243, 239, 239);
-  padding: 0;
 }
 
 </style>
