@@ -60,12 +60,13 @@
     </template>
   </v-simple-table>
   </v-card> -->
-<div>
+<div class="table-div">
     <v-data-table
       :headers="headers"
       :items="beers"
       item-key="name"
       class="elevation-1"
+      dense
       :search="search"
       :custom-filter="filterOnlyCapsText"
     >
@@ -76,13 +77,13 @@
           label="Search"
         ></v-text-field>
       </template>
-      <template>
+      <template class="table">
         <tr>
           <td></td>
           <td>
-            <img src="{image_url}">
+            <v-img :src="beers.image_url"></v-img>
           </td>
-          <td colspan="4"></td>
+
             <v-text-field
               v-model="calories"
               type="number"
@@ -175,19 +176,13 @@
 </script>
 
 <style>
-#abv-column{
-   text-align: center;
- }
-img {
-  padding: 5px;
-  width: 50px;
-  height: auto;
-}
 th{
   font-family: 'Akaya Telivigala', cursive;
-  color: #3E2723 !important;
+  color: #1f2224 !important;
   font-size: 18px !important;
   letter-spacing: 1px;
+  margin: 0 150px !important;
+  background-color:#BBDEFB;
 }
 
 td{
@@ -196,17 +191,9 @@ td{
   font-weight: 600;
 }
 
-thead{
-  background-color:#8D6E63;
-}
-
 tbody{
-  background-image: linear-gradient(180deg, #BCAAA4, #8D6E63);
+  background-image: linear-gradient(180deg, #E3F2FD, #BBDEFB);
   color: #3E2723 !important;
-}
-
-tbody > tr:hover {
-background-color: #D7CCC8 !important;
 }
 
 label{
@@ -214,17 +201,18 @@ label{
   color: #4E342E !important;
 }
 
-#filtered-column{
-  width: 200px;
-}
-
-.food-list{
-  width: 25%;
-}
-
 .search-input  {
-  margin : 0 !important;
-  background-color: #EFEBE9 !important;
+  margin: 0 !important;
+  padding-left: 10px !important;
+  background-color:#BBDEFB;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
- 
+
+.table-div{
+ width: 95%;
+ margin: auto;
+}
+
+
 </style>
