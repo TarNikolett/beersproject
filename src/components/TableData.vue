@@ -1,34 +1,46 @@
 <template>
 <div class="table-div">
-    <v-data-table
-      :headers="headers"
-      :items="beers"
-      item-key="name"
-      class="elevation-1"
-      dense
-      :search="search"
+  <v-data-table
+    :headers="headers"
+    :items="beers"
+    item-key="name"
+    dense
+    :search="search"
+    class="elevation-1"
+    :footer-props="{
+      showFirstLastPage: true,
+      firstIcon: 'mdi-arrow-collapse-left',
+      lastIcon: 'mdi-arrow-collapse-right',
+      prevIcon: 'mdi-minus',
+      nextIcon: 'mdi-plus'
+    }"
     >
-      <template v-slot:top>
-        <v-row class="first-row">
-          <v-col>
-        <v-text-field
-        class="search-input"
-          v-model="search"
-          label="Search"
-        ></v-text-field>
-         </v-col>
-         <v-col> 
-        <v-text-field
-        class="search-input"
-              v-model="abv"
-              type="number"
-              label="ABV less than:"
-            ></v-text-field>
-            </v-col>
-        </v-row> 
-      </template>
-    </v-data-table>
-  </div>
+    <template v-slot:item.image_url="{ item }">
+              <img :src="item.image_url">
+    </template>
+    <template v-slot:top>
+      <v-row class="first-row">
+        <v-col>
+          <v-text-field
+            class="search-filter-input"
+            v-model="search"
+            label="Search"
+          >
+          </v-text-field>
+        </v-col>
+        <v-col> 
+          <v-text-field
+            class="search-filter-input"
+            v-model="abv"
+            type="number"
+            label="ABV less than:"
+          >
+          </v-text-field>
+        </v-col>
+      </v-row> 
+    </template>
+  </v-data-table>
+</div>
 </template>
 
 <script>
@@ -37,33 +49,31 @@
       return {
         search: '',
         abv: '',
-        beers: [{
-        }],
+        beers: [{}],
       }
     },
     computed: {
       headers () {
         return [
-          {
-            text: 'Beers name',
-            align: 'start',
-            value: 'name',
-          },
-          {
-            text: 'Image',
-            value: 'image_url',
-
-          },
-          { text: 'Tagline', value: 'tagline' },
-          { text: 'ABV-Alcohol By Volume', value: 'abv',
-          filter: value => {
+          { text: 'Beers name', align: 'center', value: 'name',  width: 30},
+          { text: "Image", value: "image_url", width: 30 },
+          { text: 'Tagline', value: 'tagline', width: 30, align: 'center' },
+          { text: 'ABV-Alcohol By Volume', value: 'abv', 
+            filter: value => {
               if (!this.abv) return true
               return value < parseInt(this.abv)
-            }},
-            { text: 'Description', value: 'description' },
-          { text: 'Food pairing', value: 'food_pairing' },
+            }, width: 50,align: 'center'},
+          { text: 'Description', value: 'description', width: 20, align: 'center'},
+          { text: 'Food pairing', value: 'food_pairing', width: 80,align: 'center'},
         ]
       },
+    },
+    methods:{
+      searchInName(){
+        return this.beer.filter(beer => {
+          console.log(beer, this.search)
+        })
+      }
     },
     mounted() {
       fetch(`https://api.punkapi.com/v2/beers`)
@@ -90,6 +100,7 @@ td{
   font-family: 'Roboto Mono', monospace;
   font-size: 17px !important;
   font-weight: 600;
+  width: auto;
 }
 
 tbody{
@@ -102,7 +113,13 @@ label{
   color: #4E342E !important;
 }
 
-.search-input  {
+img{
+  width: 50px;
+  height:auto;
+  padding: 10px 0;
+} 
+
+.search-filter-input{
   margin: 0 !important;
   padding: 10px 20px !important;
   background-color:#BBDEFB;
@@ -118,6 +135,13 @@ label{
   margin: 0 !important;
   padding: 0 !important;
   height: 100px !important;
+}
+
+.v-data-footer {
+  font-size: 20px !important;
+  background-color:#BBDEFB;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 
